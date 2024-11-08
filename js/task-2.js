@@ -25,33 +25,23 @@ const images = [
   }
 ];
 
-const gallery = document.querySelector('.gallery');
-gallery.style.display = 'flex';
-gallery.style.flexWrap = 'wrap';
-gallery.style.gap = '16px';
-gallery.style.justifyContent = 'center';
-gallery.style.listStyle = 'none';
-gallery.style.padding = '0';
-gallery.style.margin = '0';
+const gallery = document.querySelector(".gallery");
+gallery.style.display = "flex";
+gallery.style.flexWrap = "wrap";
+gallery.style.gap = "16px";
+gallery.style.justifyContent = "center";
+gallery.style.listStyle = "none";
+gallery.style.padding = "0";
+gallery.style.margin = "0";
 
-images.forEach(imageData => {
-  const listItem = document.createElement("li");
-  const image = document.createElement("img");
+const galleryItemsMarkup = images
+  .map(
+    ({ url, alt }) => `
+    <li style="max-width: 360px;">
+      <img src="${url}" alt="${alt}" style="width: 100%; height: auto; border-radius: 8px;">
+    </li>
+  `
+  )
+  .join("");
 
-   image.src = imageData.url;
-  image.alt = imageData.alt;
-
-  listItem.appendChild(image);
-  gallery.appendChild(listItem);
-});
-
-const listItems = gallery.querySelectorAll('li');
-listItems.forEach(item => {
-  item.style.maxWidth = '360px';
-
-  const image = item.querySelector('img');
-  image.style.width = '100%';
-  image.style.height = 'auto';
-  image.style.borderRadius = '8px';
-});
-
+gallery.insertAdjacentHTML("beforeend", galleryItemsMarkup);
